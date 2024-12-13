@@ -1,0 +1,23 @@
+services:
+  comwechat:
+    image: #为了防止被和谐查封，不予展示
+    container_name: comwechat
+    network_mode: host  # 等效于 --network host
+    environment:
+      - VNCPASS=
+      - COMWECHAT=3.7.0.30-0.0.9.zip
+    volumes:
+      - ./pkg:/pkg
+      - ./images:/images
+      # - ./hosts:/etc/hosts # 如果需要的话
+      # - ./volume/WeChat Files/:/home/user/.wine/drive_c/users/user/My Documents/WeChat Files/
+      # - ./volume/Application Data:/home/user/.wine/drive_c/users/user/Application Data/
+    ipc: host  # 等效于 --ipc=host
+    privileged: true  # 等效于 --privileged
+    tty: true  # 等效于 -t
+    stdin_open: true  # 等效于 -i
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"    # 单个日志文件大小
+        max-file: "3"      # 保留的日志文件数
